@@ -1,15 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import { selectPostById } from './postsSlice'
 
 import { postUpdated } from './postsSlice'
 
 const EditPostForm = ({ match }) => {
   const { postId } = match.params
 
-  const post = useSelector((state) =>
-    state.posts.find((post) => post.id === postId)
-  )
+  const post = useSelector(selectPostById((state) => state, postId))
 
   const [title, setTitle] = useState(post.title)
   const [content, setContent] = useState(post.content)
